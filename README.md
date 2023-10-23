@@ -1,16 +1,42 @@
 # Enhanced Time-series Transformers
 
-An exploration and enhancement of Transformer models specifically tailored for time series forecasting.
+Enhancements and exploration of Transformer models for long-term time series forecasting, building upon the research presented in the paper "Are Transformers Effective for Time Series Forecasting?"
 
-## Overview
+## Introduction
 
-This repository aims to delve deeper into the applicability of Transformer architectures for long-term time series forecasting (LTSF). Stemming from the research presented in the paper "Are Transformers Effective for Time Series Forecasting?", we seek to improve upon existing models by introducing several modifications to better suit the unique challenges posed by time series data.
+Recent advancements in Transformer architectures have shown promise in various domains, including natural language processing and computer vision. This repository seeks to explore and potentially improve the application of Transformer models to the specific domain of long-term time series forecasting (LTSF). Stemming from the paper titled "Are Transformers Effective for Time Series Forecasting?", we investigate several modifications tailored to suit the unique challenges of time series data.
 
 ## Features
 
-- **Temporal Attention Mechanism**: An attention mechanism that gives more weight to temporally closer data points.
-- **Hybrid Models**: Combining the feature extraction prowess of Transformers with the temporal structure preservation capabilities of traditional models.
-- **Temporal Embeddings**: Embeddings designed to capture the temporal intervals between data points.
+- **Temporal Attention Mechanism**: Designed to give more weight to temporally closer data points.
+- **Hybrid Models**: A blend of Transformer's feature extraction and the time-awareness of traditional models.
+- **Temporal Embeddings**: Captures the intervals between data points.
+
+## Data
+
+The experiments will be conducted on a variety of time series datasets, ensuring a comprehensive evaluation of our modifications.
+
+## Method
+
+### Temporal Attention Mechanism
+By designing an attention mechanism that emphasizes recent data points, we aim to ensure that the model captures short-term patterns and dependencies more effectively.
+
+### Hybrid Models
+Merging the capabilities of Transformers and traditional models might provide a balanced approach to handle time series data, capturing both the intricate patterns and temporal structures.
+
+### Temporal Embeddings
+Standard positional encodings in Transformers might not fully capture the nuances of time intervals in time series data. By introducing embeddings tailored for this, we aim to provide the model with more contextual information.
+
+## Experimentation
+
+### Model Training
+The modified Transformer models will be trained on selected datasets. Consistent training setups will be maintained to ensure a direct comparison between models.
+
+### Performance Evaluation
+The forecasting performance of the proposed models will be compared against standard Transformer architectures and the linear models reported in the reference paper.
+
+### Interpretability Analysis
+To understand the decision-making process of the models, we'll focus on the distribution of attention weights and feature importance. This will provide insights into how the model processes time series data and the significance of each data point.
 
 ## Getting Started
 
@@ -30,14 +56,15 @@ This repository aims to delve deeper into the applicability of Transformer archi
     python main.py
     ```
 
-## Datasets
+## Citing
 
-The models are trained and validated on several time series datasets, which will be detailed here.
+If you use this repository for your research or find it useful, please consider citing:
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+```bibtex
+@misc{MarcoLagos2023EnhancedTS,
+  title={EnhancedTS-Transformers: Exploring and Enhancing Transformer Architectures for Time Series Forecasting},
+  author={Marco Lagos},
+  year={2023},
+  note={GitHub Repository: https://github.com/marcolagos/enhancedts-transformers}
+}
+```
