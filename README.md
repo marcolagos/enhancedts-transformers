@@ -51,9 +51,9 @@ To understand the decision-making process of the models, we'll focus on the dist
     pip install -r requirements.txt
     ```
 
-3. **Run the Main Script**:
+3. **Unzip the datasets**:
     ```bash
-    python main.py
+    unzip dataset.zip
     ```
 
 ## Citing
