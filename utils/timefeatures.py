@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from pandas.tseries import offsets
 from pandas.tseries.frequencies import to_offset
-
+import code
 
 class TimeFeature:
     def __init__(self):
@@ -132,3 +132,13 @@ def time_features_from_frequency_str(freq_str: str) -> List[TimeFeature]:
 
 def time_features(dates, freq='h'):
     return np.vstack([feat(dates) for feat in time_features_from_frequency_str(freq)])
+
+def age_features(time_features, log_scale=True):
+    length = time_features.shape[-1]
+    if log_scale:
+        age = np.log10(2.0 + np.arange(length))
+    else:
+        age = np.arange(length)
+
+    age = age.reshape((1, length))
+    return np.vstack([time_features, age])

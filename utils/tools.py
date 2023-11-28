@@ -23,6 +23,13 @@ def adjust_learning_rate(optimizer, epoch, args):
         lr_adjust = {epoch: args.learning_rate if epoch < 25 else args.learning_rate*0.1}
     elif args.lradj == '6':
         lr_adjust = {epoch: args.learning_rate if epoch < 5 else args.learning_rate*0.1}  
+    elif args.lradj == '7':
+        if epoch < 5:
+           lr_adjust = {epoch: args.learning_rate}
+        elif epoch < 25:
+            lr_adjust = {epoch: args.learning_rate*0.1}
+        else:
+            lr_adjust = {epoch: args.learning_rate*0.01}
     if epoch in lr_adjust.keys():
         lr = lr_adjust[epoch]
         for param_group in optimizer.param_groups:
