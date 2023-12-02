@@ -5,8 +5,9 @@ import os
 import torch
 from torch.utils.data import Dataset, DataLoader
 from sklearn.preprocessing import StandardScaler
-from utils.timefeatures import time_features
+from utils.timefeatures import time_features, age_features
 import warnings
+import code
 
 warnings.filterwarnings('ignore')
 
@@ -73,6 +74,7 @@ class Dataset_ETT_hour(Dataset):
             data_stamp = df_stamp.drop(['date'], 1).values
         elif self.timeenc == 1:
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
+            data_stamp = age_features(data_stamp)
             data_stamp = data_stamp.transpose(1, 0)
 
         self.data_x = data[border1:border2]
@@ -163,6 +165,7 @@ class Dataset_ETT_minute(Dataset):
             data_stamp = df_stamp.drop(['date'], 1).values
         elif self.timeenc == 1:
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
+            data_stamp = age_features(data_stamp)
             data_stamp = data_stamp.transpose(1, 0)
 
         self.data_x = data[border1:border2]
@@ -267,6 +270,7 @@ class Dataset_Custom(Dataset):
             data_stamp = df_stamp.drop(['date'], 1).values
         elif self.timeenc == 1:
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
+            data_stamp = age_features(data_stamp)
             data_stamp = data_stamp.transpose(1, 0)
 
         self.data_x = data[border1:border2]
@@ -370,6 +374,7 @@ class Dataset_Pred(Dataset):
             data_stamp = df_stamp.drop(['date'], 1).values
         elif self.timeenc == 1:
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
+            data_stamp = age_features(data_stamp)
             data_stamp = data_stamp.transpose(1, 0)
 
         self.data_x = data[border1:border2]

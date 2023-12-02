@@ -39,7 +39,7 @@ parser.add_argument('--pred_len', type=int, default=96, help='prediction sequenc
 # DLinear
 parser.add_argument('--individual', action='store_true', default=False, help='DLinear: a linear layer for each variate(channel) individually')
 # Formers 
-parser.add_argument('--embed_type', type=int, default=0, help='0: default 1: value embedding + temporal embedding + positional embedding 2: value embedding + temporal embedding 3: value embedding + positional embedding 4: value embedding')
+parser.add_argument('--embed_type', type=int, default=1, help='0: default 1: value embedding + temporal embedding + positional embedding 2: value embedding + temporal embedding 3: value embedding + positional embedding 4: value embedding')
 parser.add_argument('--enc_in', type=int, default=7, help='encoder input size') # DLinear with --individual, use this hyperparameter as the number of channels
 parser.add_argument('--dec_in', type=int, default=7, help='decoder input size')
 parser.add_argument('--c_out', type=int, default=7, help='output size')
@@ -65,7 +65,7 @@ parser.add_argument('--num_workers', type=int, default=10, help='data loader num
 parser.add_argument('--itr', type=int, default=2, help='experiments times')
 parser.add_argument('--train_epochs', type=int, default=10, help='train epochs')
 parser.add_argument('--batch_size', type=int, default=32, help='batch size of train input data')
-parser.add_argument('--patience', type=int, default=3, help='early stopping patience')
+parser.add_argument('--patience', type=int, default=50, help='early stopping patience')
 parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
 parser.add_argument('--des', type=str, default='test', help='exp description')
 parser.add_argument('--loss', type=str, default='mse', help='loss function')
@@ -116,7 +116,7 @@ if args.is_training:
             args.des, ii)
 
         exp = Exp(args)  # set experiments
-        print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
+        print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))    
         exp.train(setting)
 
         if not args.train_only:
@@ -148,7 +148,6 @@ else:
                                                                                                   args.des, ii)
 
     exp = Exp(args)  # set experiments
-
     if args.do_predict:
         print('>>>>>>>predicting : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
         exp.predict(setting, True)

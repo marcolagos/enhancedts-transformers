@@ -1,5 +1,6 @@
 from data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom, Dataset_Pred
 from torch.utils.data import DataLoader
+import code
 
 data_dict = {
     'ETTh1': Dataset_ETT_hour,
@@ -44,6 +45,7 @@ def data_provider(args, flag):
         train_only=train_only
     )
     print(flag, len(data_set))
+    # code.interact(local=locals())
     data_loader = DataLoader(
         data_set,
         batch_size=batch_size,

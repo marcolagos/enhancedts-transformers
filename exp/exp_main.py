@@ -17,6 +17,8 @@ import warnings
 import matplotlib.pyplot as plt
 import numpy as np
 
+import code
+
 warnings.filterwarnings('ignore')
 
 class Exp_Main(Exp_Basic):
@@ -215,6 +217,10 @@ class Exp_Main(Exp_Basic):
         if test:
             print('loading model')
             self.model.load_state_dict(torch.load(os.path.join('./checkpoints/' + setting, 'checkpoint.pth')))
+            # # Load model directly
+            # from transformers import AutoTokenizer, AutoformerForPrediction
+            # # tokenizer = AutoTokenizer.from_pretrained("elisim/autoformer-exchange-rate-50-epochs_")
+            # self.model = AutoformerForPrediction.from_pretrained("elisim/autoformer-exchange-rate-50-epochs_")
 
         preds = []
         trues = []
@@ -287,11 +293,11 @@ class Exp_Main(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
-        print('mse:{}, mae:{}'.format(mse, mae))
+        mae, mse, rmse, mape, mspe, rse, corr, mase = metric(preds, trues)
+        print('mse:{}, mae:{}, mase:{}'.format(mse, mae, mase))
         f = open("result.txt", 'a')
         f.write(setting + "  \n")
-        f.write('mse:{}, mae:{}, rse:{}, corr:{}'.format(mse, mae, rse, corr))
+        f.write('mse:{}, mae:{}, rse:{}, corr:{}, mase: {}'.format(mse, mae, rse, corr, mase))
         f.write('\n')
         f.write('\n')
         f.close()
