@@ -6,65 +6,95 @@ Enhancements and exploration of Transformer models for long-term time series for
 
 Recent advancements in Transformer architectures have shown promise in various domains, including natural language processing and computer vision. This repository seeks to explore and potentially improve the application of Transformer models to the specific domain of long-term time series forecasting (LTSF). Stemming from the paper titled "Are Transformers Effective for Time Series Forecasting?", we investigate several modifications tailored to suit the unique challenges of time series data.
 
-## Features
+## Setting Up the Development Environment
 
-- **Temporal Attention Mechanism**: Designed to give more weight to temporally closer data points.
-- **Hybrid Models**: A blend of Transformer's feature extraction and the time-awareness of traditional models.
-- **Temporal Embeddings**: Captures the intervals between data points.
+### Prerequisites:
 
-## Data
+-   Ensure you have Python 3.x installed. You can check your version with:
+    ```bash
+    python --version
+    ```
 
-The experiments will be conducted on a variety of time series datasets, ensuring a comprehensive evaluation of our modifications.
+### Steps:
 
-## Method
+1. **Clone the Repository**
 
-### Temporal Attention Mechanism
-By designing an attention mechanism that emphasizes recent data points, we aim to ensure that the model captures short-term patterns and dependencies more effectively.
+    First, clone the repository to your local machine:
 
-### Hybrid Models
-Merging the capabilities of Transformers and traditional models might provide a balanced approach to handle time series data, capturing both the intricate patterns and temporal structures.
-
-### Temporal Embeddings
-Standard positional encodings in Transformers might not fully capture the nuances of time intervals in time series data. By introducing embeddings tailored for this, we aim to provide the model with more contextual information.
-
-## Experimentation
-
-### Model Training
-The modified Transformer models will be trained on selected datasets. Consistent training setups will be maintained to ensure a direct comparison between models.
-
-### Performance Evaluation
-The forecasting performance of the proposed models will be compared against standard Transformer architectures and the linear models reported in the reference paper.
-
-### Interpretability Analysis
-To understand the decision-making process of the models, we'll focus on the distribution of attention weights and feature importance. This will provide insights into how the model processes time series data and the significance of each data point.
-
-## Getting Started
-
-1. **Clone the Repository**:
     ```bash
     git clone https://github.com/marcolagos/enhancedts-transformers.git
     cd enhancedts-transformers
     ```
 
-2. **Install Dependencies**:
+2. **Set Up a Virtual Environment**
+
+    It's recommended to use a virtual environment to ensure dependencies are isolated from your system Python. Create a new virtual environment using the `venv` module:
+
     ```bash
-    pip install -r requirements.txt
+    python -m venv tts_env
     ```
 
-3. **Unzip the datasets**:
+    This command creates a virtual environment named `env` in your project directory.
+
+3. **Activate the Virtual Environment**
+
+    Before installing dependencies or running the project, you need to activate the virtual environment:
+
+    - **On macOS and Linux**:
+
+        ```bash
+        source tts_env/bin/activate
+        ```
+
+    - **On Windows** (Command Prompt):
+
+        ```bash
+        .\tts_env\Scripts\activate
+        ```
+
+    - **On Windows** (PowerShell):
+        ```bash
+        .\tts_env\Scripts\Activate.ps1
+        ```
+
+    After activation, your terminal prompt should change to show the name of the activated environment (`tts_env`).
+
+4. **Install Dependencies**
+
+    With the virtual environment activated, install the project's dependencies:
+
     ```bash
-    unzip dataset.zip
+    pip3 install -r requirements.txt
     ```
 
-## Citing
+5. **Deactivate the Virtual Environment**
 
-If you use this repository for your research or find it useful, please consider citing:
+    Once you're done working on the project, you can deactivate the virtual environment to return to your system's Python:
 
-```bibtex
-@misc{MarcoLagos2023EnhancedTS,
-  title={EnhancedTS-Transformers: Exploring and Enhancing Transformer Architectures for Time Series Forecasting},
-  author={Marco Lagos},
-  year={2023},
-  note={GitHub Repository: https://github.com/marcolagos/enhancedts-transformers}
-}
+    ```bash
+    deactivate
+    ```
+
+## Running Tests
+
+### Downlaod datasets
+
+First download the datasets from the following google drive: https://drive.google.com/drive/u/0/folders/1NdU7D7y1VdQN_tsYTNHby5oDdp3L6O6v and place it in a top-level directory named `./dataset/`. In addition, to run the Hugging-Face pretrained model scripts, place another datasets folder in `./pretrained/dataset/`.
+
+### Scripts
+
+Navigate to `./scripts/EXP-LongForecasting` folder. Run any of the scripts in that directory with any configuration desired. Keep in mind that the scripts for running the Autoformer and DLinear models require a GPU, while the hugging-face autoformer tests recreation under `hf_script.ipynb` requires x86 architecture chips (no M1 chip). The main scripts used in this analysis are:
+```
+./Stat_Long.sh
+./Linear-I.sh
+hf_script.ipynb
+Formers_Long.sh
+./Linear/*
+```
+
+In addition, the `./pretrained/` folder holds attempts at the application of pre-trained autoformer models in the scripts:
+```
+autoformer_exp_electricity.py
+autoformer_exp_exchange.py
+autoformer_tourism_monthly.py
 ```
